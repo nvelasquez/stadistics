@@ -1,0 +1,14 @@
+<?php
+include('../librerias/motor.php');
+
+if(isset($_GET['id'])){
+	$name = $_GET['id'];
+	$query = "select * from MunicipiosJCE where IdProvincia = '$name'";
+	$pedido = mssql_query($query);
+
+	while($fila=mssql_fetch_assoc($pedido)){
+		echo "<option value='".$fila['IdMunicipio']."'>".$fila['Nombre'].'</option>';
+	}
+	mssql_free_result($pedido);
+}
+?>

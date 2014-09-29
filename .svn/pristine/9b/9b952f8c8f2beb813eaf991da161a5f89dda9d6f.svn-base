@@ -1,0 +1,20 @@
+<?php
+	
+	class conexion
+	{
+		private $enlace;
+		
+		public function __construct()
+		{	
+			$this->enlace = mssql_connect(DB_HOST,DB_USER,DB_PASS);
+			
+			mssql_select_db(DB_NAME,$this->enlace);
+		}
+		
+		public function __destruct()
+		{
+			mssql_close($this->enlace);
+		}
+	}
+	
+?>

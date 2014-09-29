@@ -1,0 +1,13 @@
+input : descipcion.
+input text: buscador con autocomplete( busca querys pre escritos y configura los filtros al query)
+	if(input Text encontro algo como(estudiantes por escuelas))
+	{
+		los demas filtros aparecen y los mas generales se quedan.	
+	}
+	else if(input text encontro solo un indicador(estudiantes))
+	{
+		aparecen los filtros para seguir buscando y el resultado es seleccionado como la fuente de datos.	
+	}
+select: base de datos(debe estar disfrasado ejemplo: SGC-2010->Sistema de gestion de centros)
+select: tabla a consultar
+select checks:selecciona los campos a seleccionar;

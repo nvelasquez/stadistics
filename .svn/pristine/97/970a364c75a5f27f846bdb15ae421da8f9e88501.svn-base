@@ -1,0 +1,171 @@
+<?php
+	include("implement.php");
+	include("librerias/motor.php");
+?>
+<script>		
+		function crear(){
+			$.get("crearVentana.php",function(data){
+				$('#tablas').append(data);
+			});
+		}			
+		function getInfo(value,name)
+		{
+			
+			$.get('tablaresult.php?'+name+'='+value,function(data){
+				
+				$('#tablaInfo').html(data);
+			});
+		}
+		function cambio(id){
+			$.get('funcion/cambio.php?id='+id,function(data){
+				$('#municipios').html(data);
+			});
+		}	
+</script>
+<div id='wrapper'>
+  <div class="row">
+  <script>
+</script>
+    <div class="large-12 columns">
+ 
+    <!-- Content Slider -->
+ 
+      <div class="row">
+        <div class="large-12">
+			  <div class="large-8 small-12 columns show-for-small " style="height:30px;box-shadow: 1px 1px 3px rgb(231, 227, 227);">
+					<section>
+					  <!-- Right Nav Section -->
+					  <ul class="nave" >
+						<li>
+						  <a href="#">Mapa</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">Grafico</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">Tabla</a>
+						</li>
+					  </ul>
+					</section>
+			  </div>
+			  <div id="tablas" class="large-4 small-12 columns " >
+				
+			  	<a onclick="if(!document.getElementById('idd')){crear()}else{}"><h2 class='large-3'>+</h2></a>
+					<form id='formulario' action="estadisticas.php?municipios" method="post">
+					<?php
+						$input = new tInput();
+						$input->crearSelect("Nombre","IdProvincia","ProvinciasJCE","provincias","Provincias");
+					?>
+					</form>
+					<form action="" method="post">
+						<tr>
+						<label>Municipios por provincia</label>
+						<td>
+							<select id='municipios' name='municipios'>
+							
+							</select>
+					</td>
+					</tr>
+					
+					</form>
+				</div>
+         
+			  
+			  <div class="large-8 small-12 columns hide-for-small ">
+					<style>
+						
+
+						.nave li{
+							margin-left: -40px;
+							display: inline-block;
+							height: 28px;
+							text-align: center;
+							color:rgb(177, 177, 177);
+							width: 70px;
+							cursor: pointer;
+							background: rgb(249, 252, 255);
+							border: solid 1px rgb(209, 209, 209);
+							box-shadow: 1px 1px 3px rgb(231, 227, 227);
+							
+						}
+						.nave li:hover {
+							background:rgb(23, 73, 230);
+							color: white;
+						}
+
+						.nave {
+							margin-left:40px;
+						}
+						.divider {
+							border:none !important;
+							background:none !important;
+							box-shadow:none !important;
+						}
+					</style>
+					<div>
+					  <!-- Right Nav Section -->
+					  <ul class="nave" >
+						<li>
+						  Mapa
+						</li>
+						<li class="divider"></li>
+						<li>
+							Grafico
+						</li>
+						<li class="divider"></li>
+						<li>
+							Tabla
+						</li>
+					  </ul>
+					</div>
+			  </div>
+			  <div class="large-8 small-12 columns" id="mapa">
+					<div style="border: solid 1px rgb(226, 225, 225);height:500px;overflow:scroll;">
+					<table style="overflow:scroll;margin-left;10px;background:rgb(243, 243, 243);box-shadow: 1px 1px 3px rgb(231, 227, 227); " id='tablaInfo' width="100%">
+					
+				
+						
+						</table>
+					</div>
+					
+			  </div>
+             
+            
+ 
+      </div>
+      <script>
+	
+		
+			function emergir(name,tabla){
+				
+				$.get('librerias/emergir.php?name='+name+'&&tabla='+tabla,function(data){
+					
+					$('#wrapper').append(data);
+				});
+				
+			}
+
+			function desemerger(name){
+				$('#'+name).remove();
+			}
+
+			function borrarBusqueda(name){
+				$("#"+name).remove();
+			}
+		
+	
+</script>
+
+    </div>
+</div>
+ 
+    <!-- End Content Slider -->
+ 
+ 
+ 
+      
+    <!-- End Content -->
+ 
+ 

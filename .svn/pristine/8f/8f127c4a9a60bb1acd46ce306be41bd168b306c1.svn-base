@@ -1,0 +1,61 @@
+
+		<?php
+						include('librerias/motor.php');
+
+
+						$bolean = true;
+
+						if(isset($_GET['municipios'])){
+							$nombre=$_GET["municipios"];
+							
+							$query = "select c.Nombre ,m.Nombre  from Centros as c
+										left join DistritosMunicipales as d on (c.IdDistritoMunicipal = d.IdDistritoMunicipal )
+										left join MunicipiosJCE as m on (d.IdMunicipio = m.IdMunicipio)where m.IdMunicipio = '{$nombre}'"
+							;
+						$pedido = mssql_query($query);
+						
+						while($fila=mssql_fetch_array($pedido)){
+						array_pop($fila);
+						$bolean = true;
+						echo "<tr>";
+							foreach($fila as $value){
+								
+								$clase=($bolean)?'ra':'';
+								
+									echo "<td onclick='if(!document.getElementById(\"{$nombre}\")){emergir(\"{$nombre}\",\"Centros\");}else{}'class='{$clase}'>".$value."</td>";
+									$bolean=false;
+
+
+							}
+						echo "</tr>";
+						}
+						mssql_free_result($pedido);
+						}
+						
+						if(isset($_GET['provincias'])){
+							$nombre=$_GET["provincias"];
+							
+							$query = "select c.Nombre ,p.Nombre  from Centros as c
+										left join DistritosMunicipales as d on (c.IdDistritoMunicipal = d.IdDistritoMunicipal )
+										left join MunicipiosJCE as m on (d.IdMunicipio = m.IdMunicipio)
+										left join ProvinciasJCE as p on (m.IdProvincia = p.IdProvincia )
+										where p.IdProvincia = '{$nombre}'"
+							;
+						$pedido = mssql_query($query);
+						
+						while($fila=mssql_fetch_array($pedido)){
+						array_pop($fila);
+						$bolean = true;
+						echo "<tr>";
+							foreach($fila as $value){
+								
+								$clase=($bolean)?'ra':'';
+								
+									echo "<td onclick='if(!document.getElementById(\"{$nombre}\")){emergir(\"{$nombre}\",\"Centros\");}else{}' class='{$clase}'>".$value."</td>";
+									$bolean=false;
+							}
+						echo "</tr>";
+						}
+						mssql_free_result($pedido);
+						}
+						?>
